@@ -24,7 +24,7 @@ public class MenuController {
 	}
 	
 	@GetMapping("/getAllMenu")
-	public List<Menu> getMethodName(String param) {
+	public List<Menu> getAllMenu() {
 		return ms.getAllMenu();
 	}
 	
