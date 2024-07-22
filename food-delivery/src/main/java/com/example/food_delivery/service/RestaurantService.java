@@ -3,6 +3,7 @@ package com.example.food_delivery.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.food_delivery.dto.RestaurantDTO;
@@ -27,12 +28,12 @@ public class RestaurantService {
 		return "Restaurant Added successfully";
 	}
 
-	public Optional<Restaurant> getRestaurantById(int resId) throws RecordNotFoundException {
-		Optional<Restaurant> ores = rdao.findById(resId);
-		if(!ores.isPresent()) {
-			throw new RecordNotFoundException("Record Not found");
-		}
-		return ores;
-	}
+	public ResponseEntity<?> getRestaurantById(int resId) throws RecordNotFoundException {
+        Optional<Restaurant> ores = rdao.findById(resId);
+        if(!ores.isPresent()) {
+            throw new RecordNotFoundException("Restaurant with ID " + resId + " not found");
+        }
+        return ResponseEntity.ok(ores.get());
+    }
 	
 }

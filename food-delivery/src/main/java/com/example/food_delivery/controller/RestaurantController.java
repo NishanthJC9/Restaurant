@@ -1,6 +1,5 @@
 package com.example.food_delivery.controller;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.food_delivery.dto.RestaurantDTO;
 import com.example.food_delivery.exception.RecordNotFoundException;
-import com.example.food_delivery.model.Restaurant;
 import com.example.food_delivery.service.RestaurantService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,14 +27,9 @@ public class RestaurantController {
 	@GetMapping("/getRestaurantById/{resId}")
     public ResponseEntity<?> getRestaurantById(@PathVariable int resId) {
         try {
-            Optional<Restaurant> restaurant = rs.getRestaurantById(resId);
-            return ResponseEntity.ok(restaurant);
+            return rs.getRestaurantById(resId);
         } catch (RecordNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body("Restaurant with ID " + resId + " not found");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("An unexpected error occurred: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 	
