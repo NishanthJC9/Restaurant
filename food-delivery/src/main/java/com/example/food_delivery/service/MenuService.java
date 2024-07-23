@@ -33,7 +33,7 @@ public class MenuService {
 			menu.setRestaurant(rs.get());;
 		}
 		dao.save(menu);
-		return "menu added successfully";
+		return "menu items added successfully";
 	}
 	
 	public List<Menu> getAllMenu(){
