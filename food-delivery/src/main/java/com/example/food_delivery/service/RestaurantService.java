@@ -25,7 +25,7 @@ public class RestaurantService {
 		res.setRestaurantName(rdto.getRestaurantName());
 		res.setRestaurantPhone(rdto.getRestaurantPhone());
 		rdao.save(res);
-		return "Restaurant Added successfully";
+		return "Restaurants Added successfully";
 	}
 
 	public ResponseEntity<?> getRestaurantById(int resId) throws RecordNotFoundException {
