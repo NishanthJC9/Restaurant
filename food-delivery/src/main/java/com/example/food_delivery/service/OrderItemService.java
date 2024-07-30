@@ -3,9 +3,11 @@ package com.example.food_delivery.service;
 import java.util.Optional;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.food_delivery.dto.OrderItemDTO;
+import com.example.food_delivery.exception.RecordNotFoundException;
 import com.example.food_delivery.model.CustomerOrder;
 import com.example.food_delivery.model.Menu;
 import com.example.food_delivery.model.OrderItem;
@@ -44,6 +46,14 @@ public class OrderItemService {
 
     public List<OrderItem> getAllOrderItems(){
         return dao.findAll();
+    }
+
+    public ResponseEntity<?> getOrderByID(int orderId) throws RecordNotFoundException{
+       Optional<OrderItem> order = dao.findById(orderId);
+       if(!order.isPresent()){
+        throw new RecordNotFoundException("No Order for particular Id");
+       }
+       return ResponseEntity.ok(order.get());
     }
 
 }

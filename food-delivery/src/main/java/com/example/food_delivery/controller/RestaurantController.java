@@ -1,12 +1,15 @@
 package com.example.food_delivery.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.example.food_delivery.dto.RestaurantDTO;
 import com.example.food_delivery.exception.RecordNotFoundException;
+import com.example.food_delivery.model.Restaurant;
 import com.example.food_delivery.service.RestaurantService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,5 +35,9 @@ public class RestaurantController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-	
+    
+    @GetMapping("/getAllRestaurants")
+    public List<Restaurant> getAllRestaurants(){
+        return rs.getAllRestaurants();
+    }
 }

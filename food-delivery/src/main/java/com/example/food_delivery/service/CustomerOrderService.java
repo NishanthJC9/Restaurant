@@ -3,9 +3,11 @@ package com.example.food_delivery.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.food_delivery.dto.CustomerOrderDTO;
+import com.example.food_delivery.exception.RecordNotFoundException;
 import com.example.food_delivery.model.CustomerOrder;
 import com.example.food_delivery.model.Restaurant;
 import com.example.food_delivery.model.User;
@@ -37,6 +39,13 @@ public class CustomerOrderService {
         }
         dao.save(order);
         return "Order saved successfully";
+    }
+    public ResponseEntity<?> getOrderById(int orderId) throws RecordNotFoundException {
+        Optional<CustomerOrder> custOrder = dao.findById(orderId);
+        if(!custOrder.isPresent()){
+            throw new RecordNotFoundException("Record not found");
+        }
+        return ResponseEntity.ok(custOrder.get());
     }
 
 }

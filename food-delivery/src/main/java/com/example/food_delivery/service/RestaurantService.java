@@ -1,5 +1,6 @@
 package com.example.food_delivery.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class RestaurantService {
             throw new RecordNotFoundException("Restaurant with ID " + resId + " not found");
         }
         return ResponseEntity.ok(ores.get());
+    }
+
+    public List<Restaurant> getAllRestaurants() {
+        return rdao.findAll();
     }
 	
 }
