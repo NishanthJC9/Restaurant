@@ -50,4 +50,9 @@ public class MenuService {
 		}
 		return ResponseEntity.ok((menu.get()));
     }
+
+	public List<Menu> getMenusForRestaurant(int resId){
+		List<Menu> menu = dao.findMenuItemsByRestaurantId(resId);
+		return menu;
+	}
 }

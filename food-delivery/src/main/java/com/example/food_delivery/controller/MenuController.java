@@ -17,6 +17,7 @@ import com.example.food_delivery.exception.RecordNotFoundException;
 import com.example.food_delivery.model.Menu;
 import com.example.food_delivery.service.MenuService;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class MenuController {
 
@@ -28,11 +29,16 @@ public class MenuController {
 		return ms.addMenu(dto);
 	}
 	
-	@CrossOrigin(origins = "*")
 	@GetMapping("/getAllMenu")
 	public List<Menu> getAllMenu() {
 		return ms.getAllMenu();
 	}
+
+	@GetMapping("/getRestaurantMenu/{resId}")
+	public List<Menu> getRestaurantMenu(@PathVariable int resId) {
+		return ms.getMenusForRestaurant(resId);
+	}
+	
 
 	@GetMapping("/getMenuById/{menuId}")
 	public ResponseEntity<?> getMenuById(@PathVariable int menuId) {
