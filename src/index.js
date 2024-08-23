@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import FoodRetrival from './FoodRetrival/FoodRetrival';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import { MenuItems } from './MenuItems/MenuItems';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>   
+    <Routes>
+      <Route path='/' element={<FoodRetrival></FoodRetrival>}/>
+      <Route path='/menuItems/:resId' element={< MenuItems/>} />
+    </Routes>
+    </Router>
   </React.StrictMode>
 );
 
